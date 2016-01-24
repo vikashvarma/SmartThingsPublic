@@ -50,7 +50,7 @@ def pageTwo() {
 				input "lightSensor", "capability.illuminanceMeasurement", required: false
         	}
         	section ("Light sensor settings") {
-        		input "lightLevel", "number",  title:"Turn on" , required: false
+        		input "lightLevel", "number",  title:"Turn on when illuminance is less than (lux)" , required: false
             }
         } else {
             section ("Sunrise offset (optional)...") {
@@ -72,7 +72,8 @@ def mainPage() {
         }
         section ("Preferences") {
         	input ("drakPref", "enum", title:"Use light sensor or sunset/sunrise", metadata: [values: ["Light Sensor", "Sunset/Sunrise"]],multiple:false,submitOnChange:true)
-        	input ("pref", "enum", title: "Dawn to dusk light or Control using sensors", metadata: [values: ["Dawn to Dusk", "Sensor" ]], multiple:false,submitOnChange: true)  
+        	input ("pref", "enum", title: "Dawn to dusk light or Control using sensors", metadata: [values: ["Dawn to Dusk", "Sensor" ]], multiple:false,submitOnChange: true) 
+            input "pushNotify", "boolean" , title:"Send notification", default: true
 		}
         if ( pref == "Sensor" || pref == "SecurityOptimized" ) {
         	section ("Sensors to control lights and switches..") {
@@ -171,7 +172,9 @@ def sensorCloseHandler(evt) {
 
 def sendMsg(msg) {
 	log.info msg
-    sendNotificationEvent("$app.label $msg");
+    if ( pushNotify) {
+   		sendNotificationEvent("$app.label $msg");
+    }
    	//sendEvent(name:"Light", value:"trunLightsOn", descriptionText: msg, displayed:true)
 }
 
