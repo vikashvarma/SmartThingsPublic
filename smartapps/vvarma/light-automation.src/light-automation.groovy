@@ -28,7 +28,7 @@ definition(
     namespace: "vvarma",
     author: "Vikash Varma",
     description: "Light and switch automation using home mode, motion, contact, and lock sensors.",
-    category: "My Apps",
+    category: "Safety & Security",
     iconUrl: "http://ecx.images-amazon.com/images/I/31zw0IKIkbL.jpg",
     iconX2Url: "http://ecx.images-amazon.com/images/I/31zw0IKIkbL._AA160_.jpg"
 )
