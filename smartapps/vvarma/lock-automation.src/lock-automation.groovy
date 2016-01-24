@@ -37,7 +37,13 @@ preferences {
 		}
     }
      
-	page (name: "page2", nextPage: "adduser",  title: "Automatically locks a deadbolt or lever lock using motion sensor or time elapsed", install: true, uninstall: true)
+	page (name: "page2", nextPage: "page3",  title: "Automatically locks a deadbolt or lever lock using motion sensor or time elapsed", uninstall: true)
+    page(name: "page3", title: "Name and Mode settings",  uninstall: true, install: true) {
+            section([mobileOnly:true]) {
+                label title: "Assign a name", required: false
+                mode title: "Set for specific mode(s)", required: false
+            } 
+       }
 }
 def page2() {
     dynamicPage(name: "page2") {
